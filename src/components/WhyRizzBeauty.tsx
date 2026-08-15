@@ -3,7 +3,7 @@ import ScrollReveal from "./ScrollReveal";
 const reasons = [
   {
     title: "1:1 맞춤 상담",
-    description: "얼굴형, 피부톤, 라이프스타일까지. 당신만을 위한 디자인을 함께 만듭니다.",
+    description: "얼굴형에 맞는 당신만을 위한 디자인을 함께 만듭니다.",
   },
   {
     title: "섬세한 기술력",

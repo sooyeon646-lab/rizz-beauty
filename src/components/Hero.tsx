@@ -4,7 +4,7 @@ const HERO_IMAGE = "/hero.jpg";
 
 export default function Hero() {
   return (
-    <section className="flex min-h-[100dvh] items-center bg-white px-5 pb-14 pt-24 sm:px-6 md:px-10 md:pb-20 md:pt-28">
+    <section className="flex min-h-[100dvh] items-center bg-white px-5 pb-14 pt-32 sm:px-6 md:px-10 md:pb-20 md:pt-28">
       <div className="mx-auto grid w-full max-w-7xl items-center gap-7 md:gap-10 lg:grid-cols-[11fr_9fr] lg:gap-12">
         <div>
           <p className="mb-5 text-[11px] font-medium tracking-[0.24em] text-muted md:mb-6">

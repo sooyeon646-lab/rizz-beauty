@@ -13,21 +13,24 @@ const services = [
     title: "여자 눈썹",
     price: "350,000원",
     image: "/women-brow.jpg",
-    objectFit: "contain" as const,
+    width: 1536,
+    height: 1536,
   },
   {
     id: "men-eyebrow",
     title: "남자 눈썹",
     price: "400,000원",
     image: "/men-brow.jpg",
-    objectFit: "contain" as const,
+    width: 1490,
+    height: 1536,
   },
   {
     id: "lip",
     title: "입술",
     price: "350,000원",
     image: "/lip-before-after.jpg",
-    objectFit: "contain" as const,
+    width: 1536,
+    height: 1536,
   },
   {
     id: "hairline",
@@ -65,7 +68,7 @@ export default function Services() {
                 className="card-premium overflow-hidden"
               >
                 {"comingSoon" in service && service.comingSoon ? (
-                  <div className="relative flex aspect-[4/3] w-full flex-col items-center justify-center border-b border-black/[0.06] bg-[#f7f5f2] px-6 text-center">
+                  <div className="relative flex aspect-[4/3] w-full flex-col items-center justify-center overflow-hidden border-b border-black/[0.06] bg-[#f7f5f2] px-6 text-center">
                     <p className="text-[13px] font-medium tracking-[0.22em] text-[#111111] md:text-[14px]">
                       COMING SOON
                     </p>
@@ -74,28 +77,15 @@ export default function Services() {
                     </p>
                   </div>
                 ) : (
-                  <div
-                    className={`image-premium relative aspect-[4/3] w-full rounded-none shadow-none ${
-                      "objectFit" in service && service.objectFit === "contain"
-                        ? "bg-beige-light"
-                        : ""
-                    }`}
-                  >
+                  <div className="w-full">
                     <Image
                       src={"image" in service ? service.image : ""}
                       alt={`${service.title} 전후 사진`}
-                      fill
+                      width={"width" in service ? service.width : 1}
+                      height={"height" in service ? service.height : 1}
                       sizes="(max-width: 768px) 100vw, 50vw"
-                      className={
-                        "objectFit" in service &&
-                        service.objectFit === "contain"
-                          ? "object-contain"
-                          : "object-cover"
-                      }
-                      {...("objectFit" in service &&
-                      service.objectFit === "contain"
-                        ? { quality: 95 }
-                        : {})}
+                      quality={95}
+                      className="h-auto w-full object-contain"
                     />
                   </div>
                 )}
