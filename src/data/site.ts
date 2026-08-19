@@ -3,6 +3,7 @@ import type { SiteData } from "@/types/site";
 export const defaultSiteData: SiteData = {
   siteName: "RIZZ BEAUTY",
   hero: {
+    subtitle: "SEMI-PERMANENT EYEBROW",
     title: "민낯에도\n자신 있는 눈썹",
     description:
       "리즈뷰티만의 고객 니즈를 찾아\n단 하나의 눈썹을 디자인합니다.",

@@ -11,7 +11,7 @@ export default function Hero({ data = defaultSiteData }: { data?: SiteData }) {
       <div className="mx-auto grid w-full max-w-7xl items-center gap-7 md:gap-10 lg:grid-cols-[11fr_9fr] lg:gap-12">
         <div>
           <p className="mb-5 text-[11px] font-medium tracking-[0.24em] text-muted md:mb-6">
-            SEMI-PERMANENT EYEBROW
+            {hero.subtitle}
           </p>
 
           <h1 className="text-[2.75rem] font-light leading-[1.12] tracking-[-0.03em] text-black md:text-[3.5rem] lg:text-[4rem]">

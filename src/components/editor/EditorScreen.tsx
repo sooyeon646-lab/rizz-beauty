@@ -19,7 +19,9 @@ export default function EditorScreen() {
   const [data, setData] = useState<SiteData>(defaultSiteData);
   const [imageStatus, setImageStatus] = useState("");
   const [imageUploading, setImageUploading] = useState(false);
+  const [subtitleStatus, setSubtitleStatus] = useState("");
   const heroImageInputRef = useRef<HTMLInputElement>(null);
+  const savedSubtitleRef = useRef(defaultSiteData.hero.subtitle);
 
   async function handleHeroImageChange(
     event: React.ChangeEvent<HTMLInputElement>,
@@ -62,6 +64,29 @@ export default function EditorScreen() {
     }
   }
 
+  async function persistHeroSubtitle(subtitle: string) {
+    if (subtitle === savedSubtitleRef.current) return;
+
+    try {
+      const response = await fetch("/api/hero-text", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ subtitle }),
+      });
+      if (!response.ok) {
+        const result = (await response.json()) as { error?: string };
+        setSubtitleStatus(result.error ?? "영문 서브 문구를 저장하지 못했습니다.");
+        return;
+      }
+      savedSubtitleRef.current = subtitle;
+      setSubtitleStatus("");
+    } catch {
+      setSubtitleStatus(
+        "영문 서브 문구를 저장하지 못했습니다. 로컬 개발 서버에서 다시 시도해주세요.",
+      );
+    }
+  }
+
   return (
     <div className="flex min-h-dvh flex-col bg-[#f4f4f2] md:h-dvh md:flex-row md:overflow-hidden">
       <aside className="border-b border-black/10 bg-white px-5 py-6 md:w-[360px] md:shrink-0 md:overflow-y-auto md:border-b-0 md:border-r">
@@ -76,8 +101,8 @@ export default function EditorScreen() {
           <br />
           상호명, 메인 제목, 소개 문구는 새로고침하면 처음 내용으로 돌아갑니다.
           <br />
-          대표 이미지, 서비스 카드, 시술 사진, 예약 및 채널, 고민 섹션, 샵 설명
-          설정은 프로젝트에 저장되어 배포 후에도 유지됩니다.
+          영문 서브 문구, 대표 이미지, 서비스 카드, 시술 사진, 예약 및 채널,
+          고민 섹션, 샵 설명 설정은 프로젝트에 저장되어 배포 후에도 유지됩니다.
         </p>
 
         <div className="mt-8 space-y-6">
@@ -94,6 +119,31 @@ export default function EditorScreen() {
               }
               className={fieldClassName}
             />
+          </label>
+
+          <label className="block">
+            <span className="text-[14px] font-medium text-[#111111]">
+              영문 서브 문구
+            </span>
+            <input
+              type="text"
+              value={data.hero.subtitle}
+              onChange={(event) =>
+                setData((current) => ({
+                  ...current,
+                  hero: { ...current.hero, subtitle: event.target.value },
+                }))
+              }
+              onBlur={(event) => {
+                void persistHeroSubtitle(event.target.value);
+              }}
+              className={fieldClassName}
+            />
+            {subtitleStatus ? (
+              <span className="mt-1.5 block text-[12px] text-[#888888]">
+                {subtitleStatus}
+              </span>
+            ) : null}
           </label>
 
           <label className="block">

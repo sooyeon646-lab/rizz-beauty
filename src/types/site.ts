@@ -48,6 +48,7 @@ export type ServiceItem = {
 };
 
 export type HeroContent = {
+  subtitle: string;
   title: string;
   description: string;
   image: string;

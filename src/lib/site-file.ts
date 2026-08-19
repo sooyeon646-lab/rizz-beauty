@@ -524,6 +524,38 @@ function capSectionCards(key: ContentSectionKey, section: ContentSection) {
   };
 }
 
+function getHeroRange(source: string) {
+  const keyIndex = source.indexOf("hero: {");
+  if (keyIndex < 0) return null;
+  const braceStart = source.indexOf("{", keyIndex);
+  if (braceStart < 0) return null;
+  const braceEnd = findMatchingBrace(source, braceStart);
+  if (braceEnd < 0) return null;
+  return { braceStart, braceEnd };
+}
+
+export function setHeroSubtitleInSource(source: string, subtitle: string) {
+  const range = getHeroRange(source);
+  if (!range) return null;
+  return replaceQuotedField(
+    source,
+    range.braceStart,
+    range.braceEnd + 1,
+    "subtitle",
+    subtitle,
+  );
+}
+
+export async function updateHeroSubtitle(subtitle: string): Promise<boolean> {
+  return withSiteFileLock(async () => {
+    const current = await readFile(siteFilePath, "utf8");
+    const updated = setHeroSubtitleInSource(current, subtitle);
+    if (!updated) return false;
+    await writeFile(siteFilePath, updated, "utf8");
+    return true;
+  });
+}
+
 export async function updateContentSection(
   key: ContentSectionKey,
   section: ContentSection,
