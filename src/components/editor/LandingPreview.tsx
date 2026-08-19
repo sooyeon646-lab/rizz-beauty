@@ -6,10 +6,9 @@ import Services from "@/components/Services";
 import Academy from "@/components/Academy";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
-import { defaultSiteData } from "@/data/site";
+import type { SiteData } from "@/types/site";
 
-export default function Home() {
-  const data = defaultSiteData;
+export default function LandingPreview({ data }: { data: SiteData }) {
   return (
     <>
       <Header data={data} />

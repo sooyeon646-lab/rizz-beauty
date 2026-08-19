@@ -1,22 +1,36 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { defaultSiteData } from "@/data/site";
+import { isLinkVisible, type SiteData } from "@/types/site";
 
-const INSTAGRAM_URL = "https://www.instagram.com/rizz__beauty";
+function getNavLinks(data: SiteData) {
+  return [
+    ...(data.why.visible ? [{ href: "#why", label: "리즈뷰티" }] : []),
+    { href: "#services", label: "시술" },
+    { href: "#academy", label: "아카데미" },
+    ...(isLinkVisible(data.links.instagram)
+      ? [
+          {
+            href: data.links.instagram.url.trim(),
+            label: "인스타그램",
+            external: true as const,
+          },
+        ]
+      : []),
+    { href: "#contact", label: "문의" },
+  ];
+}
 
-const navLinks = [
-  { href: "#why", label: "리즈뷰티" },
-  { href: "#services", label: "시술" },
-  { href: "#academy", label: "아카데미" },
-  {
-    href: INSTAGRAM_URL,
-    label: "인스타그램",
-    external: true,
-  },
-  { href: "#contact", label: "문의" },
-];
+function NavItems({
+  className,
+  data,
+}: {
+  className: string;
+  data: SiteData;
+}) {
+  const navLinks = getNavLinks(data);
 
-function NavItems({ className }: { className: string }) {
   return (
     <>
       {navLinks.map((link) =>
@@ -40,7 +54,8 @@ function NavItems({ className }: { className: string }) {
   );
 }
 
-export default function Header() {
+export default function Header({ data = defaultSiteData }: { data?: SiteData }) {
+  const { siteName } = data;
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -64,11 +79,14 @@ export default function Header() {
             href="#"
             className="text-[12px] font-semibold tracking-[0.22em] text-[#111111]"
           >
-            RIZZ BEAUTY
+            {siteName}
           </a>
 
           <nav className="hidden items-center gap-10 md:flex">
-            <NavItems className="text-[13px] font-medium tracking-[-0.01em] text-[#111111] transition-colors duration-300 hover:text-[#7C6F64]" />
+            <NavItems
+              data={data}
+              className="text-[13px] font-medium tracking-[-0.01em] text-[#111111] transition-colors duration-300 hover:text-[#7C6F64]"
+            />
           </nav>
 
           <a
@@ -83,7 +101,10 @@ export default function Header() {
           aria-label="모바일 메뉴"
           className="flex w-full items-center justify-between gap-1 px-5 pb-3 sm:px-6 md:hidden"
         >
-          <NavItems className="shrink-0 whitespace-nowrap text-[11px] font-medium tracking-[-0.01em] text-[#111111] transition-colors duration-300 hover:text-[#7C6F64] sm:text-[12px]" />
+          <NavItems
+            data={data}
+            className="shrink-0 whitespace-nowrap text-[11px] font-medium tracking-[-0.01em] text-[#111111] transition-colors duration-300 hover:text-[#7C6F64] sm:text-[12px]"
+          />
         </nav>
       </div>
     </header>
