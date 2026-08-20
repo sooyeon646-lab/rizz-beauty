@@ -1,4 +1,5 @@
 import ScrollReveal from "./ScrollReveal";
+import Visit from "./Visit";
 import { KAKAO_CHANNEL_URL, NAVER_BOOKING_URL } from "@/config/booking";
 
 const bookingButtonClass =
@@ -36,6 +37,8 @@ export default function Footer() {
             </div>
           </div>
         </ScrollReveal>
+
+        <Visit />
 
         <ScrollReveal>
           <div className="flex flex-col items-start justify-between gap-3 border-t border-border pt-6 md:flex-row md:items-center md:gap-6 md:pt-7">
