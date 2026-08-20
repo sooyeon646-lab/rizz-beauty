@@ -1,5 +1,5 @@
-import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
+import ServicePhotoGallery from "./ServicePhotoGallery";
 import { defaultSiteData } from "@/data/site";
 import { isLinkVisible, type SiteData } from "@/types/site";
 
@@ -52,20 +52,13 @@ export default function Services({
                   }
                 >
                   {photos.length > 0 ? (
-                    <div className="flex w-full flex-col gap-5">
-                      {photos.map((photo, photoIndex) => (
-                        <Image
-                          key={`${service.id}-${photo}-${photoIndex}`}
-                          src={photo}
-                          alt={`${service.name} 전후 사진`}
-                          width={serviceImageSize[service.id]?.width ?? 1536}
-                          height={serviceImageSize[service.id]?.height ?? 1536}
-                          sizes="(max-width: 768px) 100vw, 50vw"
-                          quality={95}
-                          className="block h-auto w-full rounded-[16px] object-contain"
-                        />
-                      ))}
-                    </div>
+                    <ServicePhotoGallery
+                      serviceId={service.id}
+                      serviceName={service.name}
+                      photos={photos}
+                      width={serviceImageSize[service.id]?.width ?? 1536}
+                      height={serviceImageSize[service.id]?.height ?? 1536}
+                    />
                   ) : service.comingSoon ? (
                     <div className="relative flex aspect-[4/3] w-full flex-col items-center justify-center overflow-hidden border-b border-black/[0.06] bg-[#f7f5f2] px-6 text-center">
                       <p className="text-[13px] font-medium tracking-[0.22em] text-[#111111] md:text-[14px]">

@@ -130,6 +130,7 @@ export default function ServicePhotosEditor({
   }
 
   async function moveImage(serviceId: string, index: number, offset: number) {
+    if (busy) return;
     const service = data.services.find((item) => item.id === serviceId);
     if (!service) return;
     const nextIndex = index + offset;
@@ -307,22 +308,22 @@ export default function ServicePhotosEditor({
                     alt={`${service.name} 사진 ${index + 1}`}
                     className="h-14 w-14 shrink-0 rounded-md object-cover"
                   />
-                  <div className="flex flex-wrap gap-1">
+                  <div className="flex items-center gap-1">
                     <button
                       type="button"
-                      className={buttonClassName}
-                      disabled={busy || index === 0}
+                      aria-label="한 칸 위로"
+                      className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-black/15 bg-white text-[10px] leading-none text-[#111111]"
                       onClick={() => void moveImage(service.id, index, -1)}
                     >
-                      위로
+                      ▲
                     </button>
                     <button
                       type="button"
-                      className={buttonClassName}
-                      disabled={busy || index === service.images.length - 1}
+                      aria-label="한 칸 아래로"
+                      className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-black/15 bg-white text-[10px] leading-none text-[#111111]"
                       onClick={() => void moveImage(service.id, index, 1)}
                     >
-                      아래로
+                      ▼
                     </button>
                     <button
                       type="button"

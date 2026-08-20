@@ -15,7 +15,7 @@ export const defaultSiteData: SiteData = {
       name: "여자눈썹",
       description: "",
       price: "350,000원",
-      images: ["/women-brow.jpg"],
+      images: ["/women-brow.jpg", "/service-women-eyebrow-1787197470182.jpg"],
       visible: true
     },
     {
