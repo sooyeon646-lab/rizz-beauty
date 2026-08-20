@@ -11,7 +11,7 @@ const concerns = [
   },
   {
     title: "기존 눈썹 잔흔이 마음에 들지 않는 분",
-    description: "새로운 디자인을 원하시는 분",
+    description: "예전 모양과 색이 남아 새로운 디자인이 걱정되는 분",
   },
 ];
 
@@ -24,14 +24,14 @@ export default function Concerns() {
           <h2 className="heading-section">이런 분께 추천드립니다</h2>
         </ScrollReveal>
 
-        <div className="grid gap-6 md:grid-cols-3 md:gap-8">
-          {concerns.map((item, index) => (
-            <ScrollReveal key={item.title} delay={index * 100}>
-              <div className="card-premium flex min-h-[240px] w-full min-w-0 flex-col items-start justify-start border-[#111111] px-10 py-16 text-left md:min-h-[280px] md:px-12 md:py-20 lg:px-14">
-                <h3 className="line-clamp-2 text-[17px] font-medium leading-[1.35] tracking-[-0.02em] text-heading-sub sm:text-[18px] md:text-[20px] lg:text-[21px]">
+        <div className="grid gap-4 md:grid-cols-3 md:gap-5">
+          {concerns.map((item) => (
+            <ScrollReveal key={item.title}>
+              <div className="card-premium flex w-full min-w-0 flex-col items-start justify-start border-[#111111] px-12 py-8 text-left md:px-14 md:py-10 lg:px-16">
+                <h3 className="whitespace-nowrap text-[13px] font-semibold leading-none tracking-[-0.02em] text-heading-sub sm:text-[14px] lg:text-[15px]">
                   {item.title}
                 </h3>
-                <p className="mt-7 w-full text-[14px] leading-[1.55] tracking-[-0.01em] text-body sm:text-[15px] md:text-[16px] lg:text-[17px]">
+                <p className="mt-2 w-full whitespace-nowrap text-[12px] leading-none tracking-[-0.01em] text-body sm:text-[13px]">
                   {item.description}
                 </p>
               </div>
